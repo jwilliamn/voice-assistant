@@ -2,16 +2,16 @@
 # coding: utf-8
 
 """
-    ShowRoom Assistant Service
+    Interactive Assistant Service - From scratch
     ============================================
-    Free SpeechBot Poc:
-        Speech webservice bot that interacts with user in front
+    Voice Assistant Prototype:
+        Webservice bot that interacts with user in front
         of the screen.
     Server side
 
     Note: 
     Structure:
-        showroom_assistant.py
+        interactive_assistant.py
     _copyright_ = 'Copyright (c) 2019 J.W. - Everis', 
     _license_ = GNU General Public License
 """
@@ -32,6 +32,7 @@ api = Api(app)
 session_active = True
 class ShowroomAssistant(Resource):
     def __init__(self):
+        """ Initialize some common phrases and Microsoft Voice Api """
         self.sentiment = ['happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
         self.congrats = ["Muy bien! excelente trabajo.", "¡Excelente!", "¡Bien hecho!"]
         self.again = ["A ver, inténtalo nuevamente", "Vamos a intentarlo de nuevo con otra expresión"]
@@ -54,11 +55,9 @@ class ShowroomAssistant(Resource):
                 name = req['name']
 
                 msg = 'Hola ' + name + '!'
-                #answer = input(msg)
                 print(msg)
                 self.speak.Speak(msg)
 
-                #msg = "Lo que estamos presentando aquí, es un sistema que implementa varios modelos de inteligencia artificial que fueron entrenados con aprendizaje profundo. Estos modelos se desarrollaron para la identificación de personas y detectan el género, la edad y las emociones que reflejan sus facciones a partir de un análisis de video en tiempo real."
                 msg = "Te presentamos un sistema que implementa diversos modelos de inteligencia artificial."
                 print(msg)
                 self.speak.Speak(msg)
@@ -87,13 +86,6 @@ class ShowroomAssistant(Resource):
                     #challenge = random.choice(self.sentiment)
                     challenge = random.choice(remainingSent)
                     
-                    # if challenge == reto: 
-                    #     self.sentiment.remove(reto)
-                    #     challenge = random.choice(self.sentiment)
-
-                    # while challenge == reto:
-                    #     challenge = random.choice(self.sentiment)
-
                     if challenge == "happiness":
                         msg = "Muéstranos una sonrisa"
                         print(msg)
@@ -130,7 +122,7 @@ class ShowroomAssistant(Resource):
                         self.speak.Speak(msg)
                         response = { "session":"active", "reto": challenge, "detected":"Yes", "state":"challenge"}
                 else: 
-                    msg = "Gracias por participar" #No quedan mas emociones. 
+                    msg = "Gracias por participar" 
                     print(msg)
                     self.speak.Speak(msg)
                     response = {"session":"end", "reto": "ninguno", "detected":"No", "state":"terminate"}
