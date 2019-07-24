@@ -1,0 +1,9 @@
+numpy
+pandas==0.24
+requests>=2.21
+flask==1.0.2
+flask_restful==0.3.7
+flask_assistant
+mysqlclient
+mysql-connector
+pypiwin32

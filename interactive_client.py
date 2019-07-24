@@ -35,10 +35,14 @@ from os.path import join
 
 
 # variables de conexión a la Base de Datos
-host_= "192.168.M.MMM" 
-user_="db_user"
-passwd_="db_user_password"
-database_="database_name"
+#host_= "192.168.M.MMM" 
+#user_="db_user"
+#passwd_="db_user_password"
+#database_="database_name"
+host_= "192.168.1.7" 
+user_="root"
+passwd_="skynet123$"
+database_="deepai"
 
 
 # In[3]:
