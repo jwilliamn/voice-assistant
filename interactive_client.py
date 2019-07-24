@@ -34,7 +34,7 @@ from os.path import join
 # In[2]:
 
 
-# variables de conexión to DataBase
+# variables de conexión a la Base de Datos
 host_= "192.168.M.MMM" 
 user_="db_user"
 passwd_="db_user_password"
