@@ -13,7 +13,7 @@ Then in `Fullfilment` section add the webservice endpoint:
 And this call our own webservice [dialogflow_assistant.py](https://github.com/jwilliamn/voice-assistant/blob/master/dialogflow_assistant.py)
 
 ### 2. From scratch
-In some cases we need the interaction goes only one way and no user voice feedback i.e. when an assistant wants to remind you things based on user's actions captuerd by a camera or another iot sensor. 
+In some cases we need the interaction goes only one way without user voice feedback i.e. when an assistant wants to remind you things based on user's actions captuerd by a camera or another iot sensor. 
 
 Here we build an assistant that challenges a person when is in front of a camera and recognizes him/her. The camera is connected to a facial recognition and emotion detection. The challenge is about to ask the person about several facial expression (emotion) and when is detected by the model, the assistant rewards the person.
 
