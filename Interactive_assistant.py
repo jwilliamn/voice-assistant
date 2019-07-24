@@ -125,7 +125,7 @@ class ShowroomAssistant(Resource):
                     msg = "Gracias por participar" 
                     print(msg)
                     self.speak.Speak(msg)
-                    response = {"session":"end", "reto": "ninguno", "detected":"No", "state":"terminate"}
+                    response = {"session":"end", "reto": "ninguno", "detected":"No", "state":"completed"}
                 
                 reply = {
                     "fulfillmentText": response,
@@ -158,7 +158,7 @@ class ShowroomAssistant(Resource):
                             msg = "Muchas gracias por visitarnos"
                             print(msg)
                             self.speak.Speak(msg)
-                            response = {'session':'end', "reto": "ninguno", "detected":"No", "state":"terminate"}
+                            response = {'session':'end', "reto": "ninguno", "detected":"No", "state":"completed"}
                         else:
                             response = {"session":"active", "reto": "", "detected":"Yes", "state":"welcome"}
 
@@ -198,4 +198,4 @@ api.add_resource(ShowroomAssistant, '/test')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

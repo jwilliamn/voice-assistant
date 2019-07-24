@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-"""
-    Interactive Assistant Client
-    ============================================
-    Voice assistant client:
-    Give challenge to detected person
-    Give rewards for certain activity
-
-    Note: 
-    Structure:
-    _copyright_ = 'Copyright (c) 2019 J.W. - Everis', 
-    _license_ = GNU General Public License
-"""
-
 # ### Interactive Assistant Client App
 
 # Trace (track down) detected person actions
+
+# """
+#     Interactive Assistant Client
+#     ============================================
+#     Voice assistant client:
+#     Give challenge to detected person
+#     Give rewards for certain activity
+# 
+#     Note: 
+#     Structure:
+#     _copyright_ = 'Copyright (c) 2019 J.W. - Everis', 
+#     _license_ = GNU General Public License
+# """
 
 # In[1]:
 
@@ -34,18 +34,14 @@ from os.path import join
 # In[2]:
 
 
-# variables de conexión a la Base de Datos
-#host_= "192.168.M.MMM" 
-#user_="db_user"
-#passwd_="db_user_password"
-#database_="database_name"
-host_= "192.168.1.7" 
-user_="root"
-passwd_="skynet123$"
-database_="deepai"
+# variables de conexión to DataBase
+host_= "192.168.M.MMM" 
+user_="db_user"
+passwd_="db_user_password"
+database_="database_name"
 
 
-# In[3]:
+# In[ ]:
 
 
 conn = mysql.connector.connect(host=host_, user=user_, passwd=passwd_, database=database_)
@@ -87,7 +83,7 @@ def detectSentiment(sentiment, name, reto):
         df = pd.read_sql("select * from sentiment2 where ddate = current_date() and time >= subtime(current_time(),000004) order by time DESC", conn)
 
         scores = list(df[sentiment][df["name"]==name])
-        print("scores: ", scores)
+        #print("scores: ", scores)
         
         if len(scores) > 0:
             if (max(scores) >= 0.6):
@@ -161,6 +157,10 @@ repeat = 0
 fail = 0
 listReto = []
 
+# Interaction mode 1=Presentation and 0=Development
+interaction_mode = 1
+completed_challenge = []
+
 while True:
     if session == "end" and detected == "No":
         conn = mysql.connector.connect(host=host_, user=user_, passwd=passwd_, database=database_)
@@ -176,8 +176,14 @@ while True:
                 if notRealName(curr_names[i]):
                     pass
                 else:
-                    name = curr_names[i]
-                    break
+                    if interaction_mode == 1:
+                        if curr_names[i] not in completed_challenge:
+                            name = curr_names[i]
+                            break
+                        else: pass
+                    else:
+                        name = curr_names[i]
+                        break
             
             if name != "":
                 detected = "Yes"
@@ -258,6 +264,10 @@ while True:
             else: pass
         
         if state == "terminate":
-            time.sleep(8)
+            time.sleep(10)
+            pass
+        
+        if state == "completed":
+            completed_challenge.append(name)
             pass
 
